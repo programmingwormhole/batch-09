@@ -12,4 +12,5 @@ class NoteModel {
     this.updatedAt,
   });
 
+
 }

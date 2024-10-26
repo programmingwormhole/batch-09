@@ -24,9 +24,12 @@ class CustomNotesTile extends StatelessWidget {
       ),
       child: ListTile(
         onTap: () {
+
           Get.to(() => CreateOrUpdateNoteView(
             note: note,
+            index: index,
           ));
+
         },
         contentPadding: const EdgeInsets.fromLTRB(10, 5, 0, 5),
         title: Text(

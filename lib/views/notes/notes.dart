@@ -18,7 +18,9 @@ class NotesView extends StatelessWidget {
         centerTitle: false,
         title: const Text('Notes'),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
+          IconButton(onPressed: () {
+            controller.loadNotes();
+          }, icon: const Icon(Icons.settings)),
         ],
       ),
       body: Obx(() {

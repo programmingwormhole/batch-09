@@ -5,10 +5,12 @@ import 'package:whatsapp_ui/models/note_model.dart';
 
 class CreateOrUpdateNoteView extends StatefulWidget {
   final NoteModel? note;
+  final int? index;
 
   const CreateOrUpdateNoteView({
     super.key,
     this.note,
+    this.index,
   });
 
   @override
@@ -16,7 +18,6 @@ class CreateOrUpdateNoteView extends StatefulWidget {
 }
 
 class _CreateOrUpdateNoteViewState extends State<CreateOrUpdateNoteView> {
-
   final controller = Get.put(NotesController());
 
   @override
@@ -29,8 +30,14 @@ class _CreateOrUpdateNoteViewState extends State<CreateOrUpdateNoteView> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  void dispose() {
+    super.dispose();
+    controller.titleController.clear();
+    controller.descriptionController.clear();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFf5f5f5),
@@ -48,7 +55,14 @@ class _CreateOrUpdateNoteViewState extends State<CreateOrUpdateNoteView> {
         actions: [
           TextButton(
             onPressed: () {
-              controller.createNote();
+              if (widget.note == null) {
+                controller.createNote();
+              } else {
+                controller.updateNote(
+                  widget.index!,
+                  widget.note!,
+                );
+              }
             },
             child: const Icon(Icons.done),
           )
